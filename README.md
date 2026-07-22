@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="RbSplash" width="200">
+  <img src="assets/logo.png" alt="RbSplash" width="500">
 </p>
 
 # RbSplash v1.0.0
