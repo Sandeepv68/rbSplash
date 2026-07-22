@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "faraday"
-require "json"
+require 'faraday'
+require 'json'
 
-require_relative "response"
+require_relative 'response'
 
 module RbSplash
   class HttpClient
@@ -27,17 +27,15 @@ module RbSplash
     end
 
     def make_request(url, method, query_parameters: {}, body: nil)
-      raise ArgumentError, "URL required" if url.nil? || url.empty?
+      raise ArgumentError, 'URL required' if url.nil? || url.empty?
 
       last_error = nil
 
       (0..@retries).each do |attempt|
-        begin
-          return execute_request(url, method, query_parameters, body)
-        rescue *RETRYABLE_ERRORS => e
-          last_error = e
-          sleep(@retry_delay_ms / 1000.0) if @retry_delay_ms.positive? && attempt < @retries
-        end
+        return execute_request(url, method, query_parameters, body)
+      rescue *RETRYABLE_ERRORS => e
+        last_error = e
+        sleep(@retry_delay_ms / 1000.0) if @retry_delay_ms.positive? && attempt < @retries
       end
 
       raise last_error
