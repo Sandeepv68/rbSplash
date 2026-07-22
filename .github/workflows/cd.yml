@@ -6,17 +6,20 @@ on:
       - "v*"
 
 permissions:
-  contents: read
+  contents: write
+  id-token: write
 
 jobs:
   release:
     name: Release Gem
     runs-on: ubuntu-latest
-    environment: rubygems
+    environment: release
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -31,9 +34,4 @@ jobs:
         run: gem build rb_splash.gemspec
 
       - name: Publish to RubyGems
-        run: |
-          mkdir -p ~/.gem
-          echo "---" > ~/.gem/credentials
-          echo ":rubygems_api_key: ${{ secrets.RUBYGEMS_API_KEY }}" >> ~/.gem/credentials
-          chmod 0600 ~/.gem/credentials
-          gem push rb_splash-*.gem
+        uses: rubygems/release-gem@v1
