@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description = 'A promise-based Ruby API wrapper for the Unsplash API, ported from wrapsplash (TypeScript).'
   spec.homepage = 'https://github.com/sande/rb_splash'
   spec.license = 'MIT'
-  spec.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = '>= 3.2.0'
 
   spec.files = Dir['lib/**/*', 'LICENSE', 'README.md']
   spec.require_paths = ['lib']
