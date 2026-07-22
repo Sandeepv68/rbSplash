@@ -107,14 +107,14 @@ require "rb_splash"
 api = RbSplash::WrapSplashApi.new
 
 # Initialize with a bearer token
-api.init(bearer_token: "your-bearer-token")
+api.init(bearer_token: ENV["UNSPLASH_BEARER_TOKEN"])
 
 # Or initialize with access key credentials
 api.init(
-  access_key: "your-access-key",
-  secret_key: "your-secret-key",
-  redirect_uri: "https://example.com/callback",
-  code: "authorization-code"
+  access_key: ENV["UNSPLASH_ACCESS_KEY"],
+  secret_key: ENV["UNSPLASH_SECRET_KEY"],
+  redirect_uri: ENV["UNSPLASH_REDIRECT_URI"],
+  code: ENV["UNSPLASH_AUTH_CODE"]
 )
 
 # Get the current user profile
@@ -214,18 +214,18 @@ The RbSplash instance has to be initialized with your credentials obtained from 
 
 ```ruby
 api.init(
-  access_key: '<api-key>',
-  secret_key: '<secret-key>',
-  redirect_uri: '<callback-url>',
-  code: '<authorization-code>',
-  bearer_token: '<bearer-token>'
+  access_key: ENV['UNSPLASH_ACCESS_KEY'],
+  secret_key: ENV['UNSPLASH_SECRET_KEY'],
+  redirect_uri: ENV['UNSPLASH_REDIRECT_URI'],
+  code: ENV['UNSPLASH_AUTH_CODE'],
+  bearer_token: ENV['UNSPLASH_BEARER_TOKEN']
 )
 ```
 
 If you have a `bearer_token`, then only the bearer token has to be passed in.
 
 ```ruby
-api.init(bearer_token: '<bearer-token>')
+api.init(bearer_token: ENV['UNSPLASH_BEARER_TOKEN'])
 ```
 
 #### Generate Bearer Token
@@ -237,10 +237,10 @@ A method to generate a Bearer Token for `write_access` to private data. The `ini
 api = RbSplash::WrapSplashApi.new
 
 api.init(
-  access_key: '<api-key>',
-  secret_key: '<secret-key>',
-  redirect_uri: '<callback-url>',
-  code: '<authorization-code>'
+  access_key: ENV['UNSPLASH_ACCESS_KEY'],
+  secret_key: ENV['UNSPLASH_SECRET_KEY'],
+  redirect_uri: ENV['UNSPLASH_REDIRECT_URI'],
+  code: ENV['UNSPLASH_AUTH_CODE']
 )
 
 result = api.generate_bearer_token.value!
@@ -261,7 +261,7 @@ If successful, the response body will be a JSON representation of your user's ac
 And once you have your `bearer_token` you can use it in your app like this:
 
 ```ruby
-api.init(bearer_token: '<bearer-token>')
+api.init(bearer_token: ENV['UNSPLASH_BEARER_TOKEN'])
 ```
 
 ### Users APIs
